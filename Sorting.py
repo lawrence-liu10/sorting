@@ -1,3 +1,5 @@
+import random
+
 def selection_sort(arr):
     swapped = False
 
@@ -37,8 +39,38 @@ def insertion_sort(arr):
 
 
 def main():
-    arr = [64, 34, 25, 12, 22, 11, 90]
-    print(insertion_sort(arr))
+    length = int(input("How large should the array be: "))
+    unsorted = random.sample(range(1, length + 1), length)
+    print(unsorted)
+    choice = input("Which sorting method would you like to use: ")
+
+
+    if choice.lower() == "selection":
+        while(True):
+            step = selection_sort(unsorted)
+            if step != None:
+                print(step)
+            else:
+                break
+    elif choice.lower() == "bubble":
+        while(True):
+            step = bubble_sort(unsorted)
+            if step != None:
+                print(step)
+            else:
+                break
+    elif choice.lower() == "insertion":
+        while(True):
+            step = insertion_sort(unsorted)
+            if step != None:
+                print(step)
+            else:
+                break
+
+
+
+
+
 
 if __name__ == "__main__":
     main()
