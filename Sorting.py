@@ -1,4 +1,9 @@
 import random
+from flask import Flask, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
 
 def selection_sort(arr):
     swapped = False
@@ -61,16 +66,18 @@ def main():
                 break
     elif choice.lower() == "insertion":
         while(True):
-            step 1= insertion_sort(unsorted)
+            step = insertion_sort(unsorted)
             if step != None:
                 print(step)
             else:
                 break
 
-
-
-
+@app.route('/api/data', methods=['GET'])
+def get_data():
+    data = {'message': 'Hello from Flask!'}
+    return jsonify(data)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
+    main()
