@@ -1,19 +1,49 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import random
 
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/api/submit', methods=['POST'])
+def receive_data():
+    try:
+        data = request.get_json()
+        received_data = data.get('data')
+        length = int(received_data)
+
+        unsorted = random.sample(range(1, length + 1), length)
+
+        my_dict = {}
+
+        for i in range (length):
+            key = f'{i}'
+
+            arr = selection_sort(unsorted)
+            string_arr = to_string(arr)
+            value = f''
+
+        return jsonify({'string_arr': string_arr}), 200
+    except Exception as e:
+        print('Error:', str(e))
+        return jsonify({'error': 'Failed to process data'}), 500
+    
 @app.route('/api/hello', methods=['GET'])
 def get_hello():
     data = {'message': 'Hello from Flask API!'}
     return jsonify(data)
 
-@app.route('/api/array', methods=['GET'])
+@app.route('/api/selection', methods=['GET'])
 def get_array():
     data = [1,2,3,4,5]
     return jsonify(data)
+
+def to_string(arr):
+    arr_string = ""
+    for i in range (len(arr)):
+        arr_string += str(arr[i]) + " "
+    return arr_string
+
 
 def selection_sort(arr):
     swapped = False
@@ -53,11 +83,9 @@ def insertion_sort(arr):
     return None
 
 def main():
-    length = int(input("How large should the array be: "))
-    unsorted = random.sample(range(1, length + 1), length)
-    print(unsorted)
-    choice = input("Which sorting method would you like to use: ")
 
+    choice = "selection"
+    unsorted = [1,2,3]
 
     if choice.lower() == "selection":
         while(True):
