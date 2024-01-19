@@ -14,16 +14,23 @@ def receive_data():
 
         unsorted = random.sample(range(1, length + 1), length)
 
+        arr = [selection_sort(unsorted)]
+        
+        while(True):
+            current_step = selection_sort(arr[-1])
+            if current_step != None:
+                arr.append(current_step.copy())
+            else:
+                break
+            
         my_dict = {}
 
-        for i in range (length):
-            key = f'{i}'
+        for i in range (len(arr)):
+            key = str(i)
+            value = to_string(arr[i])
+            my_dict[key] = value
 
-            arr = selection_sort(unsorted)
-            string_arr = to_string(arr)
-            value = f''
-
-        return jsonify({'string_arr': string_arr}), 200
+        return jsonify({'steps': my_dict}), 200
     except Exception as e:
         print('Error:', str(e))
         return jsonify({'error': 'Failed to process data'}), 500
