@@ -61,16 +61,11 @@ def main():
                 break
     elif choice.lower() == "insertion":
         while(True):
-            step 1= insertion_sort(unsorted)
+            step = insertion_sort(unsorted)
             if step != None:
                 print(step)
             else:
                 break
 
-
-
-
-
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    main()
