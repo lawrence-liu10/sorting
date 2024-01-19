@@ -5,11 +5,15 @@ import random
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/api/data', methods=['GET'])
-def get_data():
+@app.route('/api/hello', methods=['GET'])
+def get_hello():
     data = {'message': 'Hello from Flask API!'}
-    arr = [1,2,3,4,5]
-    return jsonify(data=arr)
+    return jsonify(data)
+
+@app.route('/api/array', methods=['GET'])
+def get_array():
+    data = [1,2,3,4,5]
+    return jsonify(data)
 
 def selection_sort(arr):
     swapped = False

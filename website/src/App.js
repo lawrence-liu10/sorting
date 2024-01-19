@@ -8,7 +8,7 @@ const App = () => {
 
     const handleClick = () => {
       setClicked(true);
-      fetch('http://localhost:8000/api/data')  // Update with your Flask API URL
+      fetch('http://localhost:8000/api/hello')  // Update with your Flask API URL
             .then(response => response.json())
             .then(data => setData(data));
       console.log(data)
@@ -16,10 +16,10 @@ const App = () => {
 
     const selection_sort = () => {
       setClicked(true);
-      fetch('http://localhost:8000/api/data') 
+      fetch('http://localhost:8000/api/array') 
             .then(response => response.json())
-            .then(dataArray => setDataArray(data.data));
-      console.log(dataArray)
+            .then(dataArray => setDataArray(dataArray));
+            console.log(dataArray)
     };
 
     useEffect(() => {
@@ -38,8 +38,6 @@ const App = () => {
             <button onClick = {selection_sort}>
               selection sort
             </button>
-
-            <p>{dataArray.join(', ')}</p>
 
 
 
