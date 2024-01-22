@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import BarGraph from './components/BarGraph';
 
 const App = () => {
     const [data, setData] = useState({});
     const [clicked, setClicked] = useState(false);
     const [dataArray, setDataArray] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const [selectionData, setSelectionData] = useState({});
+    const [graphKey, setGraphKey] = useState(0); // Add a state to force re-render
+
 
     const handleHelloClick = () => {
       setClicked(true);
@@ -31,17 +35,20 @@ const App = () => {
           },
           body: JSON.stringify({ data: inputValue }),
         }).then(response => response.json());
-  
+
+        setSelectionData(response.steps);
+
         if (response.ok) {
           console.log('Data successfully sent to Flask.');
-          // Perform any additional actions upon successful response
+          
         } else {
           console.error('Failed to send data to Flask.');
         }
-        console.log(response)
+
       } catch (error) {
         console.error('Error:', error);
       }
+      setGraphKey(prevKey => prevKey + 1);
       
     };
 
@@ -50,6 +57,8 @@ const App = () => {
             .then(response => response.json())
             .then(data => setData(data));
     }, []);
+
+    
 
     return (
         <div>
@@ -65,6 +74,11 @@ const App = () => {
               selection sort
             </button>
 
+            <BarGraph data={selectionData[2].split(' ')} />
+            
+            <pre>{JSON.stringify(selectionData, null, 2)}</pre>
+
+            
 
 
         </div>

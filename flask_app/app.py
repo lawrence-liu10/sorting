@@ -28,6 +28,7 @@ def receive_data():
         for i in range (len(arr)):
             key = str(i)
             value = to_string(arr[i])
+            print(arr[i])
             my_dict[key] = value
 
         return jsonify({'steps': my_dict}), 200
